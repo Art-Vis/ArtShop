@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ICategorys } from '../../interface/interface';
 
-const [categorys, setCategorys] = useState<ICategorys>([]);
+const [categorys, setCategorys] = useState([]);
 
 const Category = () => {
 	return (
