@@ -1,0 +1,11 @@
+.category__wrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.category__title {
+	cursor: pointer;
+	padding: 10px;
+	color: black;
+	position: relative;
+}

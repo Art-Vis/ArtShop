@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
 	return (
 		<header id='header' className='header'>
 			<div className='container header-container'>
-				<h1 className='header__title'>Art-Shop</h1>
+				<Link to={'/'}>
+					<h1 className='header__title'>Art-Shop</h1>
+				</Link>
 
 				<div className='header__input'>
 					<input
