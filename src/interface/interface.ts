@@ -14,3 +14,7 @@ export interface ICard {
 }
 
 export type ICards = ICard[];
+
+export interface SvgIconsProps {
+	src: string;
+}

@@ -1,55 +1,61 @@
-import { useEffect, useState } from 'react';
-import { getCategoryes } from '../../api/getApi';
-import { ICategorys } from '../../interface/interface';
 import './Category.css';
 import { Link } from 'react-router-dom';
 
+import { SvgIcons } from '../../SvgIcons/CategorySvg';
+
 const Category = () => {
-	const [categorys, setCategorys] = useState<ICategorys>([]);
-
-	useEffect(() => {
-		const fetchCategoryes = async () => {
-			try {
-				const res: ICategorys = await getCategoryes();
-				console.log('fetchCategoryes ~ res:', res);
-				setCategorys(res);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		fetchCategoryes();
-	}, []);
-
 	return (
 		<section className='category'>
 			<div className='container category-container'>
-				<div className='category__wrap'>
+				<button className='category__btn btn'>Категории</button>
+				<ul className='category__list'>
 					<Link to={'/pk'}>
-						<h2 className='category__title' data-text='Ноутбуки'>
-							Ноутбуки
-						</h2>
+						<li className='category__item'>
+							<h2 className='category__title notebook' data-text='Ноутбуки'>
+								Ноутбуки
+							</h2>
+							<SvgIcons src={'./src/assets/pk.svg'} />
+						</li>
 					</Link>
 					<Link to={'/mobile'}>
-						<h2 className='category__title' data-text='Телефоны'>
-							Телефоны
-						</h2>
+						<li className='category__item'>
+							<h2 className='category__title phone' data-text='Телефоны'>
+								Телефоны
+							</h2>
+							<SvgIcons src={'./src/assets/phone-new.svg'} />
+						</li>
 					</Link>
 					<Link to={'/tv'}>
-						<h2 className='category__title' data-text='Телевизоры'>
-							Телевизоры
-						</h2>
+						<li className='category__item'>
+							<h2 className='category__title tv' data-text='Телевизоры'>
+								Телевизоры
+							</h2>
+							<SvgIcons src={'./src/assets/tv.svg'} />
+						</li>
 					</Link>
 					<Link to={'/consoles'}>
-						<h2 className='category__title' data-text='Игровые приставки'>
-							Игровые приставки
-						</h2>
+						<li className='category__item'>
+							<h2
+								className='category__title consoles'
+								data-text='Игровые приставки'
+							>
+								Игровые приставки
+							</h2>
+							<SvgIcons src={'./src/assets/consoles.svg'} />
+						</li>
 					</Link>
 					<Link to={'/accessories'}>
-						<h2 className='category__title' data-text='Акксессуары'>
-							Акксессуары
-						</h2>
+						<li className='category__item'>
+							<h2
+								className='category__title accessories'
+								data-text='Акксессуары'
+							>
+								Акксессуары
+							</h2>
+							<SvgIcons src={'./src/assets/headphones.svg'} />
+						</li>
 					</Link>
-				</div>
+				</ul>
 			</div>
 		</section>
 	);

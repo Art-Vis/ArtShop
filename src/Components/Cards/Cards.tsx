@@ -1,39 +1,40 @@
-import { FC, useEffect, useState } from 'react';
-import { ICard, ICards } from '../../interface/interface';
-import { getProducts } from '../../api/getApi';
+import { FC, useEffect } from 'react';
+import { ICard } from '../../interface/interface';
 import './Cards.css';
-import Like from '../../SvgIcons/Svgicons';
+import LikeSvg from '../../SvgIcons/LikeSvg';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { toggleLike } from '../../store/likeItemsSlice';
+import { fetchProducts } from '../../store/productsSlice';
 
 interface CardsProps {
 	category: string;
 }
 
 const Cards: FC<CardsProps> = ({ category }) => {
-	const [products, setProducts] = useState<ICards>([]);
-	const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
+	const dispatch = useDispatch();
+	const { products, status, error } = useSelector(
+		(state: RootState) => state.products
+	);
+	const likedItems = useSelector((state: RootState) => state.likes.likedItems);
+
+	const handleToggleLike = (id: number) => {
+		dispatch(toggleLike({ category, id }));
+	};
 
 	useEffect(() => {
-		const fetchProducts = async () => {
-			if (category) {
-				try {
-					const res: ICards = await getProducts(category);
-					console.log('fetchProducts ~ res:', res);
-					setProducts(res);
-				} catch (error) {
-					console.log('fetchProducts ~ error:', error);
-				}
-			}
-		};
+		if (category) {
+			dispatch(fetchProducts(category));
+		}
+	}, [category, dispatch]);
 
-		fetchProducts();
-	}, [category]);
+	if (status === 'loading') {
+		return <div>Loading...</div>;
+	}
 
-	const toggleLike = (id: number) => {
-		setLikedItems(prev => ({
-			...prev,
-			[id]: !prev[id],
-		}));
-	};
+	if (status === 'failed') {
+		return <div>Error: {error}</div>;
+	}
 
 	return (
 		<section className='cards'>
@@ -48,12 +49,12 @@ const Cards: FC<CardsProps> = ({ category }) => {
 							/>
 							<button
 								className='card__like'
-								onClick={() => toggleLike(item.id)}
+								onClick={() => handleToggleLike(item.id)}
 							>
-								<Like
+								<LikeSvg
 									widthSvg={'100%'}
 									heightSvg={'100%'}
-									fill={likedItems[item.id] ? 'red' : 'none'}
+									fill={likedItems[category]?.[item.id] ? 'red' : 'none'}
 								/>
 							</button>
 							<h2 className='card__title'>{item.name}</h2>

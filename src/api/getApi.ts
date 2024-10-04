@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { ICards } from '../interface/interface';
 
-export const getProducts = async (category: string) => {
+export const getProducts = async (category: string): Promise<ICards> => {
 	try {
 		const response = await axios.get(
 			`http://localhost:3000/products/${category}`

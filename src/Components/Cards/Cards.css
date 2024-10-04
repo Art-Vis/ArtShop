@@ -20,6 +20,15 @@
 	box-shadow: 2px 4px 11px 0px rgba(34, 60, 80, 0.2);
 }
 
+.card__title {
+	font-size: 16px;
+}
+
+.card__rating,
+.card__price {
+	font-size: 14px;
+}
+
 .card__image {
 	object-fit: scale-down;
 	width: 100%;
@@ -33,6 +42,7 @@
 	top: 10px;
 	width: 30px;
 	height: 30px;
+	transition: all 0.3s ease-in-out;
 }
 
 .card__btn {
@@ -56,4 +66,10 @@
 	width: 30px;
 	height: 30px;
 	background: url('/src/assets/basketDark.svg');
+}
+
+@media (max-width: 1180px) {
+	.card {
+		max-width: 300px;
+	}
 }
