@@ -1,0 +1,82 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: relative;
+	max-width: 500px;
+	width: 100%;
+	height: 550px;
+	padding: 30px;
+	border-radius: 8px;
+	background-color: #ffffff;
+	box-shadow: 2px 4px 11px 0px rgba(34, 60, 80, 0.2);
+}
+
+.card__title {
+	font-size: 16px;
+}
+
+.card__rating,
+.card__price {
+	font-size: 14px;
+}
+
+.card__image {
+	object-fit: scale-down;
+	width: 100%;
+	height: 300px;
+}
+
+.card__like {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 30px;
+	height: 30px;
+	transition: all 0.3s ease-in-out;
+}
+
+.card__btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	max-width: 150px;
+	width: 100%;
+	padding: 10px;
+	background-color: rgba(0, 0, 255, 0.219);
+	border-radius: 14px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.card__btn::after {
+	content: '';
+	display: block;
+	background-color: darkblue;
+	width: 30px;
+	height: 30px;
+	background: url('/src/assets/basketDark.svg');
+}
+
+@media (max-width: 1180px) {
+	.card {
+		max-width: 300px;
+		height: 450px;
+		padding: 20px;
+	}
+
+	.card__image {
+		height: 200px;
+	}
+}
+
+@media (max-width: 800px) {
+	.card {
+		height: 400px;
+	}
+
+	.card__image {
+		height: 150px;
+	}
+}

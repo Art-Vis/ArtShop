@@ -18,7 +18,6 @@ export const fetchProducts = createAsyncThunk(
 	'products/fetchProducts',
 	async (category: string) => {
 		const response = await getProducts(category);
-		console.log('response:', response);
 		return response;
 	}
 );

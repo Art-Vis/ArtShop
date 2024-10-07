@@ -2,6 +2,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	gap: 10px;
 }
 
 .category__item {
@@ -14,17 +15,6 @@
 .category__item:hover {
 	transform: scale(1.1);
 }
-
-/* .category__title {
-	cursor: pointer;
-	font-size: 20px;
-	padding: 10px;
-	color: black;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-} */
 
 .category__title {
 	margin-top: 10px;
@@ -77,8 +67,23 @@
 	}
 
 	.category__list {
-		flex-direction: column;
 		align-items: center;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.4s ease;
+	}
+
+	.category__list.open {
+		max-height: 200px;
+	}
+
+	.category__img {
+		width: 25px;
+		height: 25px;
+	}
+
+	.category__title {
+		font-size: 12px;
 	}
 
 	.category__btn {

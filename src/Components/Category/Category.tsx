@@ -1,14 +1,22 @@
 import './Category.css';
 import { Link } from 'react-router-dom';
-
 import { SvgIcons } from '../../SvgIcons/CategorySvg';
+import { useState } from 'react';
 
 const Category = () => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const handleButtonClick = () => {
+		setIsOpen(!isOpen);
+	};
+
 	return (
 		<section className='category'>
 			<div className='container category-container'>
-				<button className='category__btn btn'>Категории</button>
-				<ul className='category__list'>
+				<button className='category__btn btn' onClick={handleButtonClick}>
+					Категории
+				</button>
+				<ul className={`category__list ${isOpen ? 'open' : ''}`}>
 					<Link to={'/pk'}>
 						<li className='category__item'>
 							<h2 className='category__title notebook' data-text='Ноутбуки'>

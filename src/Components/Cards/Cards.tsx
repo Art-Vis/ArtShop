@@ -1,21 +1,22 @@
 import { FC, useEffect } from 'react';
 import { ICard } from '../../interface/interface';
 import './Cards.css';
-import LikeSvg from '../../SvgIcons/LikeSvg';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
 import { toggleLike } from '../../store/likeItemsSlice';
 import { fetchProducts } from '../../store/productsSlice';
+import Card from '../Card/Card';
 
 interface CardsProps {
 	category: string;
 }
 
 const Cards: FC<CardsProps> = ({ category }) => {
-	const dispatch = useDispatch();
+	const dispatch: AppDispatch = useDispatch();
 	const { products, status, error } = useSelector(
 		(state: RootState) => state.products
 	);
+
 	const likedItems = useSelector((state: RootState) => state.likes.likedItems);
 
 	const handleToggleLike = (id: number) => {
@@ -29,7 +30,11 @@ const Cards: FC<CardsProps> = ({ category }) => {
 	}, [category, dispatch]);
 
 	if (status === 'loading') {
-		return <div>Loading...</div>;
+		return (
+			<div className='loader-container'>
+				<div className='loader'></div>
+			</div>
+		);
 	}
 
 	if (status === 'failed') {
@@ -41,27 +46,12 @@ const Cards: FC<CardsProps> = ({ category }) => {
 			<div className='container cards-container'>
 				<ul className='cards'>
 					{products.map((item: ICard, index: number) => (
-						<li className='card' key={index}>
-							<img
-								className='card__image'
-								src={item.image_url}
-								alt={`Изображение товара ${item.name}}`}
-							/>
-							<button
-								className='card__like'
-								onClick={() => handleToggleLike(item.id)}
-							>
-								<LikeSvg
-									widthSvg={'100%'}
-									heightSvg={'100%'}
-									fill={likedItems[category]?.[item.id] ? 'red' : 'none'}
-								/>
-							</button>
-							<h2 className='card__title'>{item.name}</h2>
-							<span className='card__rating'>Рейтинг: {item.rating}</span>
-							<span className='card__price'>Цена: {item.price} руб.</span>
-							<button className='card__btn'>В корзину</button>
-						</li>
+						<Card
+							key={index}
+							item={item}
+							isLiked={likedItems[category]?.[item.id] || false}
+							onToggleLike={handleToggleLike}
+						/>
 					))}
 				</ul>
 			</div>
